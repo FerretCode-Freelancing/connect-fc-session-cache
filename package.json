@@ -1,0 +1,23 @@
+{
+  "name": "fc-session-cache-store",
+  "version": "1.0.0",
+  "description": "An `express-session` compatible store for `fc-session-cache`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FerretCode-Freelancing/fc-session-cache-store.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FerretCode-Freelancing/fc-session-cache-store/issues"
+  },
+  "homepage": "https://github.com/FerretCode-Freelancing/fc-session-cache-store#readme",
+  "dependencies": {
+    "axios": "^1.1.3"
+  }
+}
