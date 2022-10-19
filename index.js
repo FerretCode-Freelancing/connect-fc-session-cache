@@ -1,4 +1,4 @@
-const axios = require("axios").default;
+const { default: fetch } = require("node-fetch");
 
 module.exports = function (session) {
   const Store = session.Store;
@@ -16,7 +16,28 @@ module.exports = function (session) {
     }
 
     get(sid) {
-      axios.get(`${this.url}/get`, {});
+      return new Promise(async (reject, resolve) => {
+        const response = await fetch(this.url, {
+          body: JSON.stringify({ cookie: sid }),
+        }).catch((err) => {
+          reject(err);
+        });
+
+        json = await response.json().catch((err) => {
+          reject(err);
+        });
+
+        resolve(json);
+      });
+    }
+
+    set(sid, session) {
+      args = [sid];
+
+      let value;
+      try {
+        value = this.serializer.stringify(value);
+      } catch (err) {}
     }
   }
 };
