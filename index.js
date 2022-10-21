@@ -1,6 +1,6 @@
 const { default: fetch } = require("node-fetch");
 
-module.exports = function (session) {
+module.exports = function (session, url) {
   const Store = session.Store;
 
   class CacheStore extends Store {
