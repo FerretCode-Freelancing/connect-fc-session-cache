@@ -24,9 +24,9 @@ module.exports = function (session, url) {
 
           const json = await response.json();
 
-          callback(json);
+          callback(json, null);
         })
-        .catch((err) => callback(err));
+        .catch((err) => callback(null, err));
     }
 
     set(sid, session, callback) {
@@ -42,9 +42,9 @@ module.exports = function (session, url) {
 
           const json = response.json();
 
-          callback(json);
+          callback(json, null);
         })
-        .catch((err) => callback(err));
+        .catch((err) => callback(null, err));
     }
 
     remove(callback) {
@@ -56,9 +56,9 @@ module.exports = function (session, url) {
 
           const text = response.text();
 
-          callback(text);
+          callback(text, null);
         })
-        .catch((err) => callback(err));
+        .catch((err) => callback(null, err));
     }
   }
 
