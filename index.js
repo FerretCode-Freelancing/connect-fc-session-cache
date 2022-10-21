@@ -15,29 +15,52 @@ module.exports = function (session) {
       this.url = options.url;
     }
 
-    get(sid) {
-      return new Promise(async (reject, resolve) => {
-        const response = await fetch(this.url, {
-          body: JSON.stringify({ cookie: sid }),
-        }).catch((err) => {
-          reject(err);
-        });
+    get(sid, callback) {
+      fetch(`${this.url}/get`, {
+        body: JSON.stringify({ cookie: sid }),
+      })
+        .then(async (response) => {
+          if (response.status !== 200) callback(null);
 
-        json = await response.json().catch((err) => {
-          reject(err);
-        });
+          const json = await response.json();
 
-        resolve(json);
-      });
+          callback(json);
+        })
+        .catch((err) => callback(err));
     }
 
-    set(sid, session) {
-      args = [sid];
+    set(sid, session, callback) {
+      fetch(`${this.url}/put`, {
+        method: "POST",
+        body: JSON.stringify({
+          cookie: sid,
+          session,
+        }),
+      })
+        .then(async (response) => {
+          if (response.status !== 200) callback(null);
 
-      let value;
-      try {
-        value = this.serializer.stringify(value);
-      } catch (err) {}
+          const json = response.json();
+
+          callback(json);
+        })
+        .catch((err) => callback(err));
+    }
+
+    remove(callback) {
+      fetch(`${this.url}/remove`, {
+        method: "DELETE",
+      })
+        .then(async (response) => {
+          if (response.status !== 200) callback(null);
+
+          const text = response.text();
+
+          callback(text);
+        })
+        .catch((err) => callback(err));
     }
   }
+
+  return CacheStore;
 };
