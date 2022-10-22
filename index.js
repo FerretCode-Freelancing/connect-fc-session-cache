@@ -39,9 +39,9 @@ module.exports = function (session) {
         .then(async (response) => {
           if (response.status !== 200) callback(null);
 
-          const json = response.json();
+          const text = response.text();
 
-          callback(json, null);
+          callback(text, null);
         })
         .catch((err) => callback(null, err));
     }
