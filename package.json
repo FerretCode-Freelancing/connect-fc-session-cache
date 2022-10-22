@@ -1,6 +1,6 @@
 {
   "name": "connect-fc-session-cache",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "An `express-session` compatible store for `fc-session-cache`",
   "main": "index.js",
   "repository": {
@@ -15,6 +15,6 @@
   },
   "homepage": "https://github.com/FerretCode-Freelancing/fc-session-cache-store#readme",
   "dependencies": {
-    "node-fetch": "^3.2.10"
+    "node-fetch": "^2.6.7"
   }
 }

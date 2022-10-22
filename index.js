@@ -1,8 +1,7 @@
 const { default: fetch } = require("node-fetch");
 
-module.exports = function (session, url) {
+module.exports = function (session) {
   const Store = session.Store;
-
   class CacheStore extends Store {
     constructor(options) {
       super(options);
@@ -60,6 +59,24 @@ module.exports = function (session, url) {
         })
         .catch((err) => callback(null, err));
     }
+
+		touch(sid, session, callback) {
+			this.get(sid, (_, err) => {
+				if (err != null) 
+					return callback(null, err);
+
+				this.set(
+					sid,
+					JSON.stringify(session),
+					(res, err) => {
+						if (err != null)
+							return callback(null, err);
+
+						callback(res, err);
+					}
+				)
+			});	
+		}
   }
 
   return CacheStore;
