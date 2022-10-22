@@ -46,7 +46,7 @@ module.exports = function (session) {
         .catch((err) => callback(null, err));
     }
 
-    remove(callback) {
+    destroy(callback) {
       fetch(`${this.url}/remove`, {
         method: "DELETE",
       })
