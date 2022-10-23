@@ -15,9 +15,7 @@ module.exports = function (session) {
     }
 
     get(sid, callback) {
-      fetch(`${this.url}/get`, {
-        body: JSON.stringify({ cookie: sid }),
-      })
+      fetch(`${this.url}/get?sid=${sid}`)
         .then(async (response) => {
           if (response.status !== 200) {
 						const text = await response.text();
