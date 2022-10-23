@@ -19,7 +19,11 @@ module.exports = function (session) {
         body: JSON.stringify({ cookie: sid }),
       })
         .then(async (response) => {
-          if (response.status !== 200) callback(null);
+          if (response.status !== 200) {
+						const text = await response.text();
+
+						callback(text, null);
+					};
 
           const json = await response.json();
 
@@ -29,6 +33,8 @@ module.exports = function (session) {
     }
 
     set(sid, session, callback) {
+			console.log(session);
+
       fetch(`${this.url}/put`, {
         method: "POST",
         body: JSON.stringify({
@@ -59,25 +65,7 @@ module.exports = function (session) {
         })
         .catch((err) => callback(null, err));
     }
-
-		touch(sid, session, callback) {
-			this.get(sid, (_, err) => {
-				if (err != null) 
-					return callback(null, err);
-
-				this.set(
-					sid,
-					JSON.stringify(session),
-					(res, err) => {
-						if (err != null)
-							return callback(null, err);
-
-						callback(res, err);
-					}
-				)
-			});	
-		}
-  }
+	}
 
   return CacheStore;
 };
