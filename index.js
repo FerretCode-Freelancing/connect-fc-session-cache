@@ -31,7 +31,7 @@ module.exports = function (session) {
 
           callback(err, sess);
         })
-        .catch((err) => callback(err, sess));
+        .catch((err) => callback(err, null));
     }
 
     set(sid, session, callback) {
@@ -47,7 +47,7 @@ module.exports = function (session) {
 
           callback(null, text);
         })
-        .catch((err) => callback(null, err));
+        .catch((err) => callback(err, null));
     }
 
     destroy(callback) {
