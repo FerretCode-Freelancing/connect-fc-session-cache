@@ -22,20 +22,20 @@ module.exports = function (session) {
           if (response.status !== 200) {
 						const text = await response.text();
 
-						callback(text, null);
+						callback(null, text);
 					};
 
           const json = await response.json();
 
-          callback(json, null);
+					console.log(json);
+
+          callback(err, sess);
         })
-        .catch((err) => callback(null, err));
+        .catch((err) => callback(err, sess));
     }
 
     set(sid, session, callback) {
-			console.log(session);
-
-      fetch(`${this.url}/put`, {
+			fetch(`${this.url}/put`, {
         method: "POST",
         body: JSON.stringify({
           cookie: sid,
@@ -43,11 +43,9 @@ module.exports = function (session) {
         }),
       })
         .then(async (response) => {
-          if (response.status !== 200) callback(null);
-
           const text = response.text();
 
-          callback(text, null);
+          callback(null, text);
         })
         .catch((err) => callback(null, err));
     }
@@ -57,13 +55,11 @@ module.exports = function (session) {
         method: "DELETE",
       })
         .then(async (response) => {
-          if (response.status !== 200) callback(null);
+					const text = response.text();
 
-          const text = response.text();
-
-          callback(text, null);
+          callback(null, text);
         })
-        .catch((err) => callback(null, err));
+        .catch((err) => callback(err, null));
     }
 	}
 
