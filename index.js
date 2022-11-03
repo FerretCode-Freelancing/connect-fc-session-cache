@@ -52,6 +52,15 @@ module.exports = function (session) {
         .catch((err) => callback(err, null));
     }
 
+		touch(sid, _, callback) {
+			this.get(sid, (err) => {
+				if(err !== null)
+					callback(err, null)
+
+				callback("ok", null)
+			})
+		}
+
     destroy(callback) {
       fetch(`${this.url}/remove`, {
         method: "DELETE",
