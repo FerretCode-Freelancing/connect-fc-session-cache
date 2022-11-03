@@ -1,6 +1,6 @@
 {
   "name": "connect-fc-session-cache",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "An `express-session` compatible store for `fc-session-cache`",
   "main": "index.js",
   "repository": {
