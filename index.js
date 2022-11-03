@@ -14,6 +14,10 @@ module.exports = function (session) {
       this.url = options.url;
     }
 
+		refresh(url) {
+			this.url = url;
+		}
+
     get(sid, callback) {
       fetch(`${this.url}/get?sid=${sid}`)
         .then(async (response) => {
@@ -27,7 +31,7 @@ module.exports = function (session) {
 
 					console.log(json);
 
-          callback(err, sess);
+          callback(null, json);
         })
         .catch((err) => callback(err, null));
     }
